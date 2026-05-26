@@ -70,7 +70,7 @@ async def get_articulo_by_id(
 
 
 @app.post('/articulos', 
-          response_model=list[ArticuloSchema]) #agregamos response_model para documentar la respuesta, responses para documentar los posibles errores
+          response_model=list[ArticuloSchema])
 async def post_articulo(
     articulo_nuevo: ArticuloSchema
 ):
@@ -80,7 +80,7 @@ async def post_articulo(
 
 @app.delete('/articulos/{id}',
             responses = not_found,
-            response_model=list[ArticuloSchema]) # ¿Que implica documentar la respuesta de un delete? En este caso, se documenta que la respuesta es una lista de articulos, lo cual implica que se devuelve la lista de articulos actualizada luego de eliminar el articulo solicitado. Esto es importante para que el cliente sepa que esperar como respuesta y pueda manejarla correctamente.    
+            response_model=list[ArticuloSchema]) #se documenta que la respuesta es una lista de articulos, lo cual implica que se devuelve la lista de articulos actualizada luego de eliminar el articulo solicitado. Esto es importante para que el cliente sepa que esperar como respuesta y pueda manejarla correctamente   
 async def delete_articulo_by_id(
     id: Annotated[int, Path(gt=0, description='ID del articulo')],
     logico: Annotated[bool, Query(description='Eliminar registro?')] = False,
@@ -96,7 +96,7 @@ async def delete_articulo_by_id(
 
 @app.put('/articulos/{id}',
          responses = not_found,
-         response_model=ArticuloSchema) #agregamos response_model para documentar la respuesta, responses para documentar los posibles errores
+         response_model=ArticuloSchema)
 async def put_articulo_by_id(
     id: Annotated[int, Path(gt=0, description='ID del articulo')],
     articulo_actualizado: ArticuloUpdateSchema
