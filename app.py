@@ -15,6 +15,7 @@ class ArticuloSchema(BaseModel):
     marca: STR_CORTITO
     articulo: STR_CORTITO
     precio: PRECIO_VALOR
+    activo: BOOL_ACTIVO = True
 
 class ArticuloUpdateSchema(BaseModel):
     categoria: STR_CORTITO
@@ -54,7 +55,7 @@ async def get_articulo():
     return articulos
 
 @app.get(
-        '/articulos{id}',
+        '/articulos/{id}',
         responses = not_found,
         response_model=ArticuloSchema) #agregamos response_model para documentar la respuesta, responses para documentar los posibles errores
 async def get_articulo_by_id(
